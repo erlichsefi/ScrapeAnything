@@ -11,5 +11,6 @@ General idea:
 5. repeat until LLM execute 'STOP'
 
 
-Advantages: This method simulate human behavior hence, this method can only be blocked by Captcha 
+Advantages: This method simulate human behavior hence, this method can only be blocked by Captcha.
+ 
 Dis-advantages: There is alot of hidden inforamtion we are ignoring, like: hover text, drop menus, etc. The LLM will only overcome this if he will move the mouse to the right location on screen.
