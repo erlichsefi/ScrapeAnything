@@ -14,4 +14,5 @@ def start_browesr():
 
 
 wd = start_browesr()
-print(wd.get("https://www.google.com").page_source)
+wd.get("https://www.google.com")
+print(wd.page_source)
