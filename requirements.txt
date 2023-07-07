@@ -1,3 +1,5 @@
-selenium
-pandas
-openai
+selenium==4.10.0
+pandas==2.0.3
+openai==0.27.8
+Pillow==10.0.0
+pydantic==2.0.2
