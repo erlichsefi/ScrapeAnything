@@ -2,3 +2,4 @@ venv
 *.pth
 env
 browser_base_translation/outputs/*
+.env
