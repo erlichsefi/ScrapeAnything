@@ -43,5 +43,8 @@ Previous executions:
 def get_stop_patterns():
     return [f'\n{OBSERVATION_TOKEN}', f'\n\t{OBSERVATION_TOKEN}']
 
+def get_final_answer_token():
+    return FINAL_ANSWER_TOKEN
+
 def format_prompt(**kwrgs):
     return  PROMPT_TEMPLATE.format(**kwrgs)

@@ -4,12 +4,12 @@ from typing import Tuple
 import json
 
 
-def make_a_decide_on_next_action(self, prompt: str,num_loops:int, output_folder:str,final_answer_token:str,stop_pattern:list[str]) -> str:        
+def make_a_decide_on_next_action(llm, prompt: str,num_loops:int, output_folder:str,final_answer_token:str,stop_pattern:list[str]) -> str:        
     to_text_file(prompt,f"{output_folder}/step_{str(num_loops)}_prompt.txt")
-    generated = self.llm.generate(prompt, stop=stop_pattern)
+    generated = llm.generate(prompt, stop=stop_pattern)
 
     to_text_file(generated,f"{output_folder}/step_{str(num_loops)}_response.txt")
-    tool, tool_input = self.extract_tool_and_args(generated,final_answer_token)
+    tool, tool_input = extract_tool_and_args(generated,final_answer_token)
 
     return generated, tool, parse_json(tool_input)
 
@@ -34,8 +34,8 @@ def strip_tool(string:str):
     return re.sub(r'[^a-zA-Z ]', '', string).strip(" ").strip('"')
 
 def strip_characther_in_args(string:str):
-    string_temp = string.strip(" ").strip('"')
-    string_temp  = "{"+string.split("{")[-1]
+    string_temp = string.strip(" ").strip('"').strip("None").strip("\n")
+    string_temp  = "{"+string_temp.split("{")[-1]
     string_temp = string_temp.split("}")[0] + "}"
     return string_temp
 

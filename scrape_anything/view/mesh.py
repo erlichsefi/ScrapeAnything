@@ -28,6 +28,10 @@ def minimize_and_enrich_page_data(df,viewpointscroll,viewportHeight,screenshot_f
 
 def get_screen_information(web_driver):
     all_elements_on_screen  = screen_to_table(web_driver)
+
+    if all_elements_on_screen.empty:
+        raise Exception("wasn't able to see anything on screen.")
+    
     viewpointscroll,viewportHeight = screen_to_window_dim(web_driver)
     scroll_ratio = get_scroll_options(web_driver)
     return all_elements_on_screen,viewpointscroll,viewportHeight,scroll_ratio

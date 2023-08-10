@@ -1,8 +1,10 @@
-from .browser import run_js_code
+from scrape_anything.browser import run_js_code
+import os
 
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def screen_to_window_dim(wd):
-    logs = run_js_code(wd,"window.js")
+    logs = run_js_code(wd,os.path.join(CURRENT_PATH,"window.js"))
     assert len(logs) == 2
     viewpointscroll = int(logs[0])
     viewportHeight = int(logs[1])
@@ -13,12 +15,15 @@ def screen_to_table(wd):
   import pandas as pd
   import io
 
-  logs = run_js_code(wd,"elements.js")
+  
+
+  logs = run_js_code(wd,os.path.join(CURRENT_PATH,"elements.js"))
   try:
      return pd.read_csv(io.StringIO("\n".join(logs)), sep=",")
   except Exception as e:
-    print(f"WARNING:\n On Table Data: {logs}\n Error {e}")
-    return pd.read_csv(io.StringIO("\n".join(logs)), sep=",",on_bad_lines="skip")
+    raise Exception("Can't parse script output.")
+    # #print(f"WARNING:\n On Table Data: {logs}\n Error {e}")
+    # return pd.read_csv(io.StringIO("\n".join(logs)), sep=",",on_bad_lines="skip")
   
 
 def get_scroll_height(web_driver):

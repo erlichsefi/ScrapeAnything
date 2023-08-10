@@ -1,15 +1,17 @@
 
 
-def start_browesr(dockerized=False):
+def start_browesr(dockerized=True,headless=False):
   from selenium import webdriver
   from selenium.webdriver.chrome.service import Service
 
   
   chrome_options = webdriver.ChromeOptions()
-  #chrome_options.add_argument('--headless')
+  
   chrome_options.add_argument('--no-sandbox')
   chrome_options.add_argument('--lang=en')
-  #chrome_options.headless = True
+  if headless:
+    chrome_options.headless = True
+    chrome_options.add_argument('--headless')
   if dockerized:
     return webdriver.Remote("http://host.docker.internal:4444/wd/hub",options=chrome_options)
   
@@ -18,7 +20,7 @@ def start_browesr(dockerized=False):
 
 def load_script(filepath):
   with open(filepath, 'r', encoding='utf-8') as f:
-      return "\n".join(f.readlines())
+      return "".join(f.readlines())
 
 def run_js_code(wd,filepath):
   script = f"""

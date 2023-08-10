@@ -20,6 +20,7 @@ class Agent(BaseModel):
     max_loops: int = 1
     # The stop pattern is used, so the LLM does not hallucinate until the end
     stop_pattern: List[str] = get_stop_patterns()
+    final_answer_token:str = get_final_answer_token()
 
     @property
     def tool_description(self) -> str:
@@ -38,7 +39,7 @@ class Agent(BaseModel):
         return "\n".join(list(filter(lambda x: len(x.strip())>0,generated.split("\n"))))
     
     def take_action(self,web_driver, tool:str, tool_input:str,num_loops:int,output_folder:str):
-        if tool == 'Final Answer':
+        if tool == self.final_answer_token:
             return tool_input
 
         if tool not in self.tool_by_names:
@@ -81,6 +82,7 @@ class Agent(BaseModel):
         os.makedirs(output_folder)
         
         on_screen = None
+        web_driver = None
         try:
             web_driver = start_browesr()
             web_driver.set_window_size(1024, 768)
@@ -99,6 +101,7 @@ class Agent(BaseModel):
                 print(f"--- Iteration {num_loops} ---")
                 
                 curr_prompt = format_prompt(today = datetime.date.today(),
+                    site_url=url,
                     tool_description=self.tool_description,
                     tool_names=self.tool_names,
                     task_to_accomplish=task_to_accomplish,
@@ -107,8 +110,9 @@ class Agent(BaseModel):
                     screen_size=screen_size,scroll_ratio=scroll_ratio,
                 )
                 
+                generated = "parsing generation failed"
                 try:
-                    generated, tool, tool_input = make_a_decide_on_next_action(curr_prompt,num_loops,output_folder)
+                    generated, tool, tool_input = make_a_decide_on_next_action(self.llm,curr_prompt,num_loops,output_folder,self.final_answer_token,self.stop_pattern)
                     need_to_wait = self.take_action(web_driver, tool, tool_input,num_loops,output_folder)
                     previous_responses_status = "successful."
 
@@ -123,7 +127,7 @@ class Agent(BaseModel):
                 finally:
                      on_screen,_,_,\
                      screen_size,_, _,\
-                     scroll_ratio = self.compute_next_infomration_on_screen(web_driver,output_folder,loop_num=num_loops)
+                     scroll_ratio = self.fetch_infomration_on_screen(web_driver,output_folder,loop_num=num_loops)
 
                 
                 previous_responses.append(f"\n\nPrevious {num_loops} response:\n{self.clean_empty_lines(generated)}\nexecution status:{previous_responses_status}")
@@ -131,6 +135,9 @@ class Agent(BaseModel):
         except Exception as e:
             raise e
         finally:
-            if web_driver:
-                web_driver.close()
-                web_driver.quit()
+            try:
+                if web_driver != None:
+                    web_driver.close()
+                    web_driver.quit()
+            except UnboundLocalError:
+                raise ValueError("please start server")

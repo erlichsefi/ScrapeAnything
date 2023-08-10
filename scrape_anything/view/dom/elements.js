@@ -64,5 +64,5 @@ function getXPath(element) {
   
   // Display the element details
   console.log("centerX,centerY,ElementType,textContent,TooltipValue,AriaLabel,data-initial-value,innerText,parent_xpath,height,width,top,bottom,left,right,cursor,onclick_no_null");
-  console.log(elementDetails.map( e=> (e.rect.left + (e.rect.width / 2))+","+(e.rect.top + (e.rect.height / 2))+","+e.e_type+","+e.textContent+","+e.tooltip+","+e.ariaLabel+","+e.data_initial_value+","+e.innerText+","+e.parent_xpath+","+e.rect.height+","+e.rect.width+","+e.rect.top+","+e.rect.bottom+","+e.rect.left+","+e.rect.right+","+e.cursor+","+e.onclick_no_null).join("\\n"));
+  console.log(elementDetails.map( e=> (e.rect.left + (e.rect.width / 2))+","+(e.rect.top + (e.rect.height / 2))+","+e.e_type+","+e.textContent+","+e.tooltip+","+e.ariaLabel+","+e.data_initial_value+","+e.innerText+","+e.parent_xpath+","+e.rect.height+","+e.rect.width+","+e.rect.top+","+e.rect.bottom+","+e.rect.left+","+e.rect.right+","+e.cursor+","+e.onclick_no_null).join("\n"));
   
