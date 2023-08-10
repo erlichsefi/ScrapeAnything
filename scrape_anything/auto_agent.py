@@ -77,8 +77,24 @@ class Agent(BaseModel):
 
         return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio
 
+    def get_output_folder(self):
+        import uuid
+        import datetime
+
+        # Generate a UUID and replace dashes with underscores
+        uuid_str = str(uuid.uuid4()).replace("-", "_")
+
+        # Get the current date and time
+        current_datetime = datetime.datetime.now()
+
+        # Format the date and time as a string
+        datetime_str = current_datetime.strftime("%H_%M_%S_%Y_%m_%d")
+
+        # Combine the UUID and datetime
+        return f"{datetime_str}x{uuid_str}"
+
     def run(self, task_to_accomplish: str, url:str):
-        output_folder = os.path.join("outputs",str(uuid.uuid4()).replace("-","_"))
+        output_folder = os.path.join("outputs",self.get_output_folder())
         os.makedirs(output_folder)
         
         on_screen = None

@@ -23,7 +23,7 @@ def minimize_and_enrich_page_data(df,viewpointscroll,viewportHeight,screenshot_f
     df = minimize_page_data(df,viewpointscroll,viewportHeight,using_vision=True)
     df = enrich_base_on_vision(df,screenshot_filename)
     df.drop(columns=['parent_xpath','height','width','top','bottom','left','right'],inplace=True)
-    return df
+    return df.fillna("")
 
 
 def get_screen_information(web_driver):
