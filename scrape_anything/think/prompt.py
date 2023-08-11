@@ -1,6 +1,7 @@
 FINAL_ANSWER_TOKEN = "Final Answer:"
 OBSERVATION_TOKEN = "Observation:"
 THOUGHT_TOKEN = "Thought:"
+
 PROMPT_TEMPLATE = """
 Today is {today}, the site i'm looking on is {site_url}.
 

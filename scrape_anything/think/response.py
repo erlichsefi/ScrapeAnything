@@ -1,14 +1,12 @@
-from ..io import to_text_file
+
 import re
 from typing import Tuple
 import json
 
 
 def make_a_decide_on_next_action(llm, prompt: str,num_loops:int, output_folder:str,final_answer_token:str,stop_pattern:list[str]) -> str:        
-    to_text_file(prompt,f"{output_folder}/step_{str(num_loops)}_prompt.txt")
-    generated = llm.generate(prompt, stop=stop_pattern)
+    generated = llm.generate(prompt,stop_pattern,output_folder,num_loops)
 
-    to_text_file(generated,f"{output_folder}/step_{str(num_loops)}_response.txt")
     tool, tool_input = extract_tool_and_args(generated,final_answer_token)
 
     return generated, tool, parse_json(tool_input)
