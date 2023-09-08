@@ -1,0 +1,15 @@
+{"manifest_version": 2,
+"name": "My Test Extension",
+"version": "1.0",
+"permissions": ["activeTab", "https://ajax.googleapis.com/", "storage"],
+"background": {"scripts":["background.js"],
+ "persistent": false},
+ "content_scripts": [
+    {
+    "matches": ["<all_urls>"],
+    "js": ["content.js","scripts/elements.js", "scripts/window.js"]
+    }
+    ],
+    "options_page": "options.html",
+    "browser_action": {"default_popup": "popup.html"}
+}
