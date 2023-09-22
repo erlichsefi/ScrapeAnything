@@ -25,7 +25,9 @@ class WebDriverController(Controller):
         raw_on_screen, viewpointscroll,viewportHeight,scroll_ratio = get_screen_information(self.web_driver)
 
         # get screen size
-        screen_size = get_screen_size(self.web_driver)
+        width,height = get_screen_size(self.web_driver)
+        screen_size = f"width={width},height={height}"
+
         file_name_png = web_driver_to_image(self.web_driver,f"{output_folder}/step_{loop_num+1}")
         file_name_html = web_driver_to_html(self.web_driver,f"{output_folder}/step_{loop_num+1}")
 

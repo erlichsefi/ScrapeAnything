@@ -87,8 +87,7 @@ def get_screen_size(webdriver):
   window_size = webdriver.get_window_size()
   width = window_size["width"]
   height = window_size["height"]
-  return f"width={width},height={height}"
-
+  return width,height
 
 from selenium.webdriver.support.ui import WebDriverWait
 

@@ -60,7 +60,7 @@ class Agent(BaseModel):
             screen_size,_, _,\
                 scroll_ratio,url = controller.fetch_infomration_on_screen(output_folder,loop_num=num_loops)
             
-            while num_loops < self.max_loops:
+            while num_loops < self.max_loops or self.max_loops == -1:
                 num_loops += 1
                 print(f"--- Iteration {num_loops} ---")
                 
