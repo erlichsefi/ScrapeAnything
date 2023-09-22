@@ -1,38 +1,23 @@
 import datetime
 import os
-import uuid
-from .controllers.web_driver import WebDriver
 
 from pydantic import BaseModel
-from typing import List, Dict
 
 
-from .browser import *
-from .view import *
-from .think import *
-from .act import *
-from .controllers import Controller
+from scrape_anything.browser import *
+from scrape_anything.view import *
+from scrape_anything.think import *
+from scrape_anything.act import *
+from scrape_anything.controllers import Controller
+from scrape_anything.tools import ToolBox
 
 
 class Agent(BaseModel):
     llm: ChatLLM
-    tools: List[ToolInterface] = [ClickOnCoordinates(),EnterText(),GoBack(),ScrollRight(),ScrollUp(),ScrollDown(),Refresh(),HitAKey()]
     max_loops: int = 1
-    # The stop pattern is used, so the LLM does not hallucinate until the end
-    stop_pattern: List[str] = get_stop_patterns()
-    final_answer_token:str = get_final_answer_token()
+    tool_box : ToolBox = ToolBox()
+    
 
-    @property
-    def tool_description(self) -> str:
-        return "\n".join([f"{tool.name}: {tool.description}" for tool in self.tools])
-
-    @property
-    def tool_names(self) -> str:
-        return ",".join([tool.name for tool in self.tools])
-
-    @property
-    def tool_by_names(self) -> Dict[str, ToolInterface]:
-        return {tool.name: tool for tool in self.tools}
     
     @staticmethod
     def clean_empty_lines(generated:str):
@@ -54,7 +39,14 @@ class Agent(BaseModel):
         # Combine the UUID and datetime
         return f"{datetime_str}x{uuid_str}"
 
-    def run(self,controller, task_to_accomplish: str):
+    def make_a_decide_on_next_action(self, prompt: str,num_loops:int, output_folder:str,tool_box:ToolBox) -> str:        
+        generated = self.llm.generate(prompt,output_folder,num_loops)
+
+        tool, tool_input = extract_tool_and_args(generated,tool_box.final_answer_token)
+
+        return generated, tool, parse_json(tool_input)
+    
+    def run(self, controller: Controller, task_to_accomplish: str):
         output_folder = os.path.join("outputs",self.get_output_folder())
         os.makedirs(output_folder)
         
@@ -74,8 +66,8 @@ class Agent(BaseModel):
                 
                 curr_prompt = format_prompt(today = datetime.date.today(),
                     site_url=url,
-                    tool_description=self.tool_description,
-                    tool_names=self.tool_names,
+                    tool_description=self.tool_box.tool_description,
+                    tool_names=self.tool_box.tool_names,
                     task_to_accomplish=task_to_accomplish,
                     previous_responses="\n".join(previous_responses),
                     on_screen_data=on_screen,
@@ -84,8 +76,9 @@ class Agent(BaseModel):
                 
                 generated = "parsing generation failed"
                 try:
-                    generated, tool, tool_input = make_a_decide_on_next_action(self.llm,curr_prompt,num_loops,output_folder,self.final_answer_token,self.stop_pattern)
-                    controller.take_action(tool, tool_input,num_loops,output_folder)
+                    generated, tool, tool_input = self.make_a_decide_on_next_action(curr_prompt,num_loops,output_folder,self.tool_box)
+                    tool_executor = self.tool_box.get_tool(tool, tool_input)
+                    controller.take_action(tool_executor, tool_input,num_loops,output_folder)
                     previous_responses_status = "successful."
                     
                 except ValueError as e:

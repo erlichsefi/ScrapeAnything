@@ -2,20 +2,23 @@ from ..browser import *
 from ..view import *
 from ..think import *
 from ..act import *
-from selenium.common.exceptions import WebDriverException
 from .controller import Controller
+from selenium.common.exceptions import WebDriverException
 
 class WebDriverController(Controller):
 
 
     def __init__(self,url) -> None:
-        self.web_driver = None
-        self.url = url
+        try:
+            self.web_driver = start_browesr(selenium_host="selenium-chrome")
+            self.web_driver.set_window_size(1024, 768)
+            self.web_driver.get(url)
+            self.url = url
+        except Exception as e:
+            self.close()
+            raise e
+            
 
-    def init_feed(self):
-        self.web_driver = start_browesr()
-        self.web_driver.set_window_size(1024, 768)
-        self.web_driver.get(self.url)
 
     def fetch_infomration_on_screen(self,output_folder:str,loop_num:int):
         # compute the elements on screen, current + change
@@ -36,16 +39,9 @@ class WebDriverController(Controller):
         return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,self.url
     
 
-    def take_action(self,tool:str, tool_input:str,num_loops:int,output_folder:str):
-        if tool == self.final_answer_token:
-            return tool_input
-
-        if tool not in self.tool_by_names:
-            raise ValueError(f"unknown tool:{tool}")
-
+    def take_action(self,tool_executor:ToolInterface,tool_input:str,num_loops:int,output_folder:str):
         initial_page_url = self.web_driver.current_url
-        tool_executor = self.tool_by_names[tool]
-        
+
         if tool_executor.is_click_on_screen():
             draw_on_screen(self.web_driver,f"{output_folder}/step_{str(num_loops)}",**tool_input)
         try:
@@ -64,7 +60,7 @@ class WebDriverController(Controller):
     def close(self):
         try:
             if self.web_driver != None:
-               self. web_driver.close()
+               self.web_driver.close()
                self.web_driver.quit()
         except UnboundLocalError:
             raise ValueError("please start server")

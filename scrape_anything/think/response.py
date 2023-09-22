@@ -1,15 +1,8 @@
-
 import re
-from typing import Tuple
 import json
+from typing import Tuple
 
 
-def make_a_decide_on_next_action(llm, prompt: str,num_loops:int, output_folder:str,final_answer_token:str,stop_pattern:list[str]) -> str:        
-    generated = llm.generate(prompt,stop_pattern,output_folder,num_loops)
-
-    tool, tool_input = extract_tool_and_args(generated,final_answer_token)
-
-    return generated, tool, parse_json(tool_input)
 
 def extract_tool_and_args(generated: str, final_answer_token:str) -> Tuple[str, str]:
     if final_answer_token in generated:

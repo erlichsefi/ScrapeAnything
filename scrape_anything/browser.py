@@ -1,6 +1,6 @@
 
 
-def start_browesr(dockerized=True,headless=False):
+def start_browesr(dockerized=True,headless=False,selenium_host="host.docker.internal"):
   from selenium import webdriver
   from selenium.webdriver.chrome.service import Service
 
@@ -13,7 +13,7 @@ def start_browesr(dockerized=True,headless=False):
     chrome_options.headless = True
     chrome_options.add_argument('--headless')
   if dockerized:
-    return webdriver.Remote("http://host.docker.internal:4444/wd/hub",options=chrome_options)
+    return webdriver.Remote(f"http://{selenium_host}:4444/wd/hub",options=chrome_options)
   
   service = Service(executable_path=r'/usr/bin/chromedriver')
   return webdriver.Chrome(service=service,options=chrome_options)

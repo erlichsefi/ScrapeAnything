@@ -1,3 +1,3 @@
-from scrape_anything.think.response import make_a_decide_on_next_action
+from scrape_anything.think.response import extract_tool_and_args,parse_json
 from scrape_anything.think.chat_llm import ChatLLM
 from scrape_anything.think.prompt import format_prompt,get_stop_patterns,get_final_answer_token
