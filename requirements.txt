@@ -5,4 +5,4 @@ Pillow==10.0.0
 pydantic==2.0.2
 python-dotenv==1.0.0
 pytesseract==0.3.10
-open-interpreter
+flask==2.3.3
