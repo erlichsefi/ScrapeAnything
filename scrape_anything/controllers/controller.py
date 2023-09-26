@@ -26,7 +26,19 @@ class Controller(ABC):
         on_screen.to_csv(f"{output_folder}/step_{loop_num+1}_minimized.csv",index=False)
 
         return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,url
+    
+    def pickle(self,output_folder,loop_num,**data):
+        import pickle
 
+        # Pickle the dictionary and save it to a file
+        with open(f"{output_folder}/data_{loop_num}.pkl", 'wb') as file:
+            pickle.dump(data, file)
+
+    def unpickle(self,output_folder,loop_num):
+        import pickle
+        with open(f"{output_folder}/data_{loop_num}.pkl", 'rb') as file:
+            return pickle.loads(file)
+        
     @abstractmethod
     def take_action(self,tool_executor:ToolInterface, tool_input:str,num_loops:int,output_folder:str):
         pass
