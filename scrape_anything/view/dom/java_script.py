@@ -1,10 +1,10 @@
-from scrape_anything.browser import run_js_code
+from scrape_anything.browser import extract_with_js_code
 import os
 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 def screen_to_window_dim(wd):
-    logs = run_js_code(wd,os.path.join(CURRENT_PATH,"window.js"))
+    logs = extract_with_js_code(wd,os.path.join(CURRENT_PATH,"window.js"))
     assert len(logs) == 2
     viewpointscroll = int(logs[0])
     viewportHeight = int(logs[1])
@@ -14,7 +14,7 @@ def screen_to_window_dim(wd):
 def screen_to_table(wd):
   import pandas as pd
   import io
-  logs = run_js_code(wd,os.path.join(CURRENT_PATH,"elements.js"))
+  logs = extract_with_js_code(wd,os.path.join(CURRENT_PATH,"elements.js"))
   try:
      return pd.read_csv(io.StringIO("\n".join(logs)), sep=",")
   except Exception as e:
@@ -104,12 +104,12 @@ def screen_to_table(wd):
 #         return "Client cannot scroll either left or right!"
 
 def get_scroll_width(web_driver):
-    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_width.js"))
+    logs = extract_with_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_width.js"))
     assert len(logs) == 1
     return logs[0]
     
 def get_scroll_height(web_driver):
-    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_height.js"))
+    logs = extract_with_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_height.js"))
     assert len(logs) == 1
     return logs[0]
 
@@ -120,7 +120,7 @@ def get_scroll_options(web_driver):
 
 
 def get_screen_size(web_driver):
-    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"get_window_size.js"))
+    logs = extract_with_js_code(web_driver,os.path.join(CURRENT_PATH,"get_window_size.js"))
     assert len(logs) == 2
     window_size_width = logs[0]
     window_size_height = logs[1]
@@ -128,6 +128,6 @@ def get_screen_size(web_driver):
 
 
 def get_url(web_driver):
-    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"get_url.js"))
+    logs = extract_with_js_code(web_driver,os.path.join(CURRENT_PATH,"get_url.js"))
     assert len(logs) == 1
     return logs[0]

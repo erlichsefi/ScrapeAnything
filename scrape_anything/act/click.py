@@ -1,4 +1,5 @@
 from .tool import ToolInterface
+from .draw import draw_arrow
 
 def click_on_screen(wd, x, y):
   js_script = f"return document.elementFromPoint({x}, {y})"
@@ -18,6 +19,8 @@ class ClickOnCoordinates(ToolInterface):
   def use(self,web_driver:object, x: float, y:float) -> str:
       click_on_screen(web_driver,x,y)
 
+  def example(self,web_driver: object, x:float ,y:float) -> None:
+      draw_arrow(web_driver,x,y,"click here")
 
 class EnterText(ToolInterface):
     """Click on a field and enter text"""
@@ -29,7 +32,11 @@ class EnterText(ToolInterface):
     def use(self, web_driver: object, x:float ,y:float, text: str) -> None:
         js_script = f"return document.elementFromPoint({x}, {y})"
         input_field = web_driver.execute_script(js_script)
-        #print(input_field)
+
         # Enter the text into the input field
         input_field.click()
         input_field.send_keys(text)
+
+
+    def example(self,web_driver: object, x:float ,y:float, text: str) -> None:
+      draw_arrow(web_driver,x,y, f"enter '{text}' here")

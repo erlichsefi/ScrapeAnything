@@ -44,7 +44,7 @@ def load_script(filepath):
   with open(filepath, 'r', encoding='utf-8') as f:
       return "".join(f.readlines())
 
-def run_js_code(wd,filepath):
+def extract_with_js_code(wd,filepath):
   script = f"""
   var consoleLogs = [];
   var originalLog = console.log;
@@ -57,6 +57,12 @@ def run_js_code(wd,filepath):
 
   return consoleLogs;
   """
+  return wd.execute_script(script)
+
+
+def action_with_js_code(wd,filepath,**kwarg):
+  script = load_script(filepath)
+  script = script.format(**kwarg)
   return wd.execute_script(script)
 
 
