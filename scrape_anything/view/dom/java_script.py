@@ -22,94 +22,109 @@ def screen_to_table(wd):
      return pd.read_csv(io.StringIO("\n".join(logs)), sep=",")
   except Exception as e:
     raise Exception("Can't parse script output.")
-    # #print(f"WARNING:\n On Table Data: {logs}\n Error {e}")
-    # return pd.read_csv(io.StringIO("\n".join(logs)), sep=",",on_bad_lines="skip")
-  
 
-def get_scroll_height(web_driver):
-  import time
-  initial_scroll_position = web_driver.execute_script("return window.pageYOffset")
 
-  # Scroll down a bit
-  web_driver.execute_script("window.scrollBy(0, 100);")
+# def get_scroll_height(web_driver):
+#   import time
+#   initial_scroll_position = web_driver.execute_script("return window.pageYOffset")
 
-  # Wait for a brief moment
-  time.sleep(1)
+#   # Scroll down a bit
+#   web_driver.execute_script("window.scrollBy(0, 100);")
 
-  # Get the scroll position after scrolling down
-  scroll_down_position = web_driver.execute_script("return window.pageYOffset")
+#   # Wait for a brief moment
+#   time.sleep(1)
 
-  # Scroll up to the initial position
-  web_driver.execute_script(f"window.scrollTo(0, {initial_scroll_position});")
+#   # Get the scroll position after scrolling down
+#   scroll_down_position = web_driver.execute_script("return window.pageYOffset")
 
-  # Wait for a brief moment
-  time.sleep(1)
+#   # Scroll up to the initial position
+#   web_driver.execute_script(f"window.scrollTo(0, {initial_scroll_position});")
 
-  # Scroll up a bit
-  web_driver.execute_script("window.scrollBy(0, -100);")
+#   # Wait for a brief moment
+#   time.sleep(1)
 
-  # Wait for a brief moment
-  time.sleep(1)
+#   # Scroll up a bit
+#   web_driver.execute_script("window.scrollBy(0, -100);")
 
-  # Get the scroll position after scrolling up
-  scroll_up_position = web_driver.execute_script("return window.pageYOffset")
+#   # Wait for a brief moment
+#   time.sleep(1)
 
-  # Scroll back to the initial position
-  web_driver.execute_script(f"window.scrollTo(0, {initial_scroll_position});")
+#   # Get the scroll position after scrolling up
+#   scroll_up_position = web_driver.execute_script("return window.pageYOffset")
 
-  # Compare the scroll positions
-  if scroll_down_position > initial_scroll_position or scroll_up_position < initial_scroll_position:
-      return "Client can scroll both up and down!"
-  elif scroll_down_position > initial_scroll_position:
-      return "Client can scroll down!"
-  elif scroll_up_position < initial_scroll_position:
-      return "Client can scroll up!"
-  else:
-      return "Client cannot scroll either up or down!"
+#   # Scroll back to the initial position
+#   web_driver.execute_script(f"window.scrollTo(0, {initial_scroll_position});")
+
+#   # Compare the scroll positions
+#   if scroll_down_position > initial_scroll_position or scroll_up_position < initial_scroll_position:
+#       return "Client can scroll both up and down!"
+#   elif scroll_down_position > initial_scroll_position:
+#       return "Client can scroll down!"
+#   elif scroll_up_position < initial_scroll_position:
+#       return "Client can scroll up!"
+#   else:
+#       return "Client cannot scroll either up or down!"
+
+# def get_scroll_width(web_driver):
+#     import time
+#     initial_scroll_position = web_driver.execute_script("return window.pageXOffset")
+
+#     # Scroll right a bit
+#     web_driver.execute_script("window.scrollBy(100, 0);")
+
+#     # Wait for a brief moment
+#     time.sleep(1)
+
+#     # Get the scroll position after scrolling right
+#     scroll_right_position = web_driver.execute_script("return window.pageXOffset")
+
+#     # Scroll left to the initial position
+#     web_driver.execute_script(f"window.scrollTo({initial_scroll_position}, 0);")
+
+#     # Wait for a brief moment
+#     time.sleep(1)
+
+#     # Scroll left a bit
+#     web_driver.execute_script("window.scrollBy(-100, 0);")
+
+#     # Wait for a brief moment
+#     time.sleep(1)
+
+#     # Get the scroll position after scrolling left
+#     scroll_left_position = web_driver.execute_script("return window.pageXOffset")
+
+#     # Scroll back to the initial position
+#     web_driver.execute_script(f"window.scrollTo({initial_scroll_position}, 0);")
+
+#     # Compare the scroll positions
+#     if scroll_right_position > initial_scroll_position or scroll_left_position < initial_scroll_position:
+#         return "Client can scroll both left and right!"
+#     elif scroll_right_position > initial_scroll_position:
+#         return "Client can scroll right!"
+#     elif scroll_left_position < initial_scroll_position:
+#         return "Client can scroll left!"
+#     else:
+#         return "Client cannot scroll either left or right!"
 
 def get_scroll_width(web_driver):
-    import time
-    initial_scroll_position = web_driver.execute_script("return window.pageXOffset")
-
-    # Scroll right a bit
-    web_driver.execute_script("window.scrollBy(100, 0);")
-
-    # Wait for a brief moment
-    time.sleep(1)
-
-    # Get the scroll position after scrolling right
-    scroll_right_position = web_driver.execute_script("return window.pageXOffset")
-
-    # Scroll left to the initial position
-    web_driver.execute_script(f"window.scrollTo({initial_scroll_position}, 0);")
-
-    # Wait for a brief moment
-    time.sleep(1)
-
-    # Scroll left a bit
-    web_driver.execute_script("window.scrollBy(-100, 0);")
-
-    # Wait for a brief moment
-    time.sleep(1)
-
-    # Get the scroll position after scrolling left
-    scroll_left_position = web_driver.execute_script("return window.pageXOffset")
-
-    # Scroll back to the initial position
-    web_driver.execute_script(f"window.scrollTo({initial_scroll_position}, 0);")
-
-    # Compare the scroll positions
-    if scroll_right_position > initial_scroll_position or scroll_left_position < initial_scroll_position:
-        return "Client can scroll both left and right!"
-    elif scroll_right_position > initial_scroll_position:
-        return "Client can scroll right!"
-    elif scroll_left_position < initial_scroll_position:
-        return "Client can scroll left!"
-    else:
-        return "Client cannot scroll either left or right!"
-
+    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_width.js"))
+    assert len(logs) == 1
+    return logs[0]
+    
+def get_scroll_height(web_driver):
+    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_height.js"))
+    assert len(logs) == 1
+    return logs[0]
 
 def get_scroll_options(web_driver):
     width = get_scroll_width(web_driver)
     height = get_scroll_height(web_driver)
     return f"On the Width Axis, {width}. On the Height Axis, {height}"
+
+
+def get_screen_size(web_driver):
+    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"get_window_size.js"))
+    assert len(logs) == 2
+    window_size_width = int(logs[0])
+    window_size_height = int(logs[1])
+    return window_size_width,window_size_height

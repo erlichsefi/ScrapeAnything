@@ -83,12 +83,6 @@ def draw_on_screen(webdriver,filename,x,y,**kwarg):
   return filename
 
 
-def get_screen_size(webdriver):
-  window_size = webdriver.get_window_size()
-  width = window_size["width"]
-  height = window_size["height"]
-  return width,height
-
 from selenium.webdriver.support.ui import WebDriverWait
 
 def wait_for_page_load(wdriver):
