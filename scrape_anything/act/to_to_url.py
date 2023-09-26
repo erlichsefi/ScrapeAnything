@@ -1,4 +1,5 @@
 from .tool import ToolInterface
+from .draw import go_to_url
 
 class GoToURL(ToolInterface):
   """ Go to a specific url address """
@@ -10,6 +11,8 @@ class GoToURL(ToolInterface):
   def use(self, web_driver:object, url: str)-> None:
       web_driver.get(url)
 
+  def example(self,web_driver: object, url:str) -> None:
+      go_to_url(web_driver,text=f"go to {url}")
 
 def change_url(web_driver,first_page):
   web_driver.get(first_page)

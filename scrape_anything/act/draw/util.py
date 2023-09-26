@@ -20,3 +20,6 @@ def scroll_right(web_driver):
 
 def scroll_left(web_driver):
     action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_left.js"))
+
+def go_to_url(web_driver,text):
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"go_to_url.js"),text=text)
