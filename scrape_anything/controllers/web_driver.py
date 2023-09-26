@@ -39,7 +39,8 @@ class WebDriverController(Controller):
         # store the minimized elements 
         on_screen.to_csv(f"{output_folder}/step_{loop_num+1}_minimized.csv",index=False)
 
-        return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,self.url
+        url = get_url(self.web_driver)
+        return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,url
     
 
     def take_action(self,tool_executor:ToolInterface,tool_input:str,num_loops:int,output_folder:str):

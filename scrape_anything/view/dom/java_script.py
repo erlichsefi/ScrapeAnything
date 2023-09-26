@@ -125,3 +125,9 @@ def get_screen_size(web_driver):
     window_size_width = logs[0]
     window_size_height = logs[1]
     return window_size_width,window_size_height
+
+
+def get_url(web_driver):
+    logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"get_url.js"))
+    assert len(logs) == 1
+    return logs[0]

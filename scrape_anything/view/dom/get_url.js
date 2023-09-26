@@ -1,0 +1,1 @@
+console.log(window.location.href.substring(0, 60));
