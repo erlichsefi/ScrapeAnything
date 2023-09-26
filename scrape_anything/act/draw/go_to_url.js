@@ -21,7 +21,7 @@ arrow.style.marginBottom = '10px';
 const text = document.createElement('p');
 text.style.color = '#fff';
 text.style.fontSize = '16px';
-text.textContent = {};
+text.textContent = '{url}'; // for the python format 
 
 // Add the indicator elements to the container
 indicatorContainer.appendChild(arrow);

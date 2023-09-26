@@ -22,7 +22,7 @@ def scroll_left(web_driver):
     action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_left.js"))
 
 def go_to_url(web_driver,url):
-    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"go_to_url.js"),f"Go to {url}")
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"go_to_url.js"),url=f"Go to {url}")
 
 def refresh(web_driver):
     action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"show_text.js"),text="refresh the page")
