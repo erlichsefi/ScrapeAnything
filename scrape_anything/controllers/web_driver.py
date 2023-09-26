@@ -22,11 +22,12 @@ class WebDriverController(Controller):
 
     def fetch_infomration_on_screen(self,output_folder:str,loop_num:int):
         # compute the elements on screen, current + change
-        raw_on_screen, viewpointscroll,viewportHeight,scroll_ratio = get_screen_information(self.web_driver)
+        raw_on_screen, viewpointscroll,viewportHeight,width_scroll,height_scroll = get_screen_information(self.web_driver)
 
         # get screen size
         width,height = get_screen_size(self.web_driver)
         screen_size = f"width={width},height={height}"
+        scroll_ratio = f"On the Width Axis, {width_scroll}. On the Height Axis, {height_scroll}"
 
         file_name_png = web_driver_to_image(self.web_driver,f"{output_folder}/step_{loop_num+1}")
         file_name_html = web_driver_to_html(self.web_driver,f"{output_folder}/step_{loop_num+1}")

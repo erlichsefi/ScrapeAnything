@@ -19,12 +19,13 @@ class RemoteFeedController(Controller):
 
         incoming_data:IncommingData = self.incoming_data_queue.get()
         # compute the elements on screen, current + change
-        raw_on_screen, viewpointscroll,viewportHeight,scroll_ratio = incoming_data.raw_on_screen,incoming_data.viewpointscroll,incoming_data.viewportHeight,incoming_data.scroll_ratio
+        raw_on_screen, viewpointscroll,viewportHeight,scroll_width,scroll_height = incoming_data.raw_on_screen,incoming_data.viewpointscroll,incoming_data.viewportHeight,incoming_data.scroll_width,incoming_data.scroll_height
         # store the raw elements before processing
         raw_on_screen.to_csv(f"{output_folder}/step_{loop_num+1}_raw.csv")
 
         
         # get screen size
+        scroll_ratio = f"On the Width Axis, {scroll_width}. On the Height Axis, {scroll_height}"
         screen_size = f"width={incoming_data.width},height={incoming_data.height}"
         file_name_png = None
         file_name_html = None

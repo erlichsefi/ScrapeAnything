@@ -14,9 +14,6 @@ def screen_to_window_dim(wd):
 def screen_to_table(wd):
   import pandas as pd
   import io
-
-  
-
   logs = run_js_code(wd,os.path.join(CURRENT_PATH,"elements.js"))
   try:
      return pd.read_csv(io.StringIO("\n".join(logs)), sep=",")
@@ -117,9 +114,9 @@ def get_scroll_height(web_driver):
     return logs[0]
 
 def get_scroll_options(web_driver):
-    width = get_scroll_width(web_driver)
-    height = get_scroll_height(web_driver)
-    return f"On the Width Axis, {width}. On the Height Axis, {height}"
+    width_scroll = get_scroll_width(web_driver)
+    height_scroll = get_scroll_height(web_driver)
+    return width_scroll,height_scroll
 
 
 def get_screen_size(web_driver):
