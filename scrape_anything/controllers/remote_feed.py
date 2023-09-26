@@ -10,8 +10,7 @@ from queue import Queue
 
 class RemoteFeedController(Controller):
 
-    def __init__(self,url,incoming_data_queue:Queue,outgoing_data_queue:Queue) -> None:
-        self.url = url
+    def __init__(self,incoming_data_queue:Queue,outgoing_data_queue:Queue) -> None:
         self.incoming_data_queue = incoming_data_queue
         self.outgoing_data_queue = outgoing_data_queue
 
@@ -19,14 +18,10 @@ class RemoteFeedController(Controller):
 
         incoming_data:IncommingData = self.incoming_data_queue.get()
         # compute the elements on screen, current + change
-        raw_on_screen, viewpointscroll,viewportHeight,scroll_width,scroll_height = incoming_data.raw_on_screen,incoming_data.viewpointscroll,incoming_data.viewportHeight,incoming_data.scroll_width,incoming_data.scroll_height
-        width = incoming_data.width
-        height = incoming_data.height
-        url = incoming_data.url
         file_name_png = None
         file_name_html = None
 
-        return self.process_screen_data(raw_on_screen,scroll_width,scroll_height,width,height,output_folder,viewpointscroll,viewportHeight,url,loop_num,file_name_png=file_name_png,file_name_html=file_name_html)
+        return self.process_screen_data(incoming_data,output_folder,loop_num,file_name_png=file_name_png,file_name_html=file_name_html)
 
     
 
@@ -36,6 +31,9 @@ class RemoteFeedController(Controller):
                                                   **tool_input))
 
         
+    def unpickle(self, output_folder, loop_num):
+        data = super().unpickle(output_folder, loop_num)
+        self.incoming_data_queue.put(data)
         
 
     def close(self):

@@ -1,5 +1,6 @@
 import datetime
 import os
+import threading
 
 from pydantic import BaseModel
 
@@ -45,7 +46,13 @@ class Agent(BaseModel):
         tool, tool_input = extract_tool_and_args(generated,tool_box.final_answer_token)
 
         return generated, tool, parse_json(tool_input)
-    
+
+    def run_parallel(self,controller: Controller, task_to_accomplish: str):
+        thread = threading.Thread(target=self.run,args=(controller, task_to_accomplish))
+        thread.start()
+
+        return thread
+        
     def run(self, controller: Controller, task_to_accomplish: str):
         output_folder = os.path.join("outputs",self.get_output_folder())
         os.makedirs(output_folder)

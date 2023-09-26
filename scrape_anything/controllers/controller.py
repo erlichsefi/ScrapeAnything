@@ -14,7 +14,13 @@ class Controller(ABC):
         pass
 
 
-    def process_screen_data(self,raw_on_screen,scroll_width,scroll_height,width,height,output_folder,viewpointscroll,viewportHeight,url,loop_num,file_name_png=None,file_name_html=None):
+    def process_screen_data(self,incoming_data,output_folder,loop_num,file_name_png=None,file_name_html=None):
+
+        raw_on_screen, viewpointscroll,viewportHeight,scroll_width,scroll_height = incoming_data.raw_on_screen,incoming_data.viewpointscroll,incoming_data.viewportHeight,incoming_data.scroll_width,incoming_data.scroll_height
+        width = incoming_data.width
+        height = incoming_data.height
+        url = incoming_data.url
+
         scroll_ratio = f"On the Width Axis, {scroll_width}. On the Height Axis, {scroll_height}"
         screen_size = f"width={width},height={height}"
         # store the raw elements before processing
@@ -27,7 +33,7 @@ class Controller(ABC):
 
         return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,url
     
-    def pickle(self,output_folder,loop_num,**data):
+    def pickle(self,output_folder,loop_num,data):
         import pickle
 
         # Pickle the dictionary and save it to a file
@@ -37,7 +43,7 @@ class Controller(ABC):
     def unpickle(self,output_folder,loop_num):
         import pickle
         with open(f"{output_folder}/data_{loop_num}.pkl", 'rb') as file:
-            return pickle.loads(file)
+            return pickle.load(file)
         
     @abstractmethod
     def take_action(self,tool_executor:ToolInterface, tool_input:str,num_loops:int,output_folder:str):
