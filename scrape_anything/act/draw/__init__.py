@@ -1,1 +1,1 @@
-from .util import draw_arrow,scroll_up,scroll_down,scroll_right,go_to_url
+from .util import draw_arrow,scroll_up,scroll_down,scroll_right,go_to_url,hit_a_key,refresh,go_back_a_page

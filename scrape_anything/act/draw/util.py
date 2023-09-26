@@ -21,5 +21,14 @@ def scroll_right(web_driver):
 def scroll_left(web_driver):
     action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"scroll_left.js"))
 
-def go_to_url(web_driver,text):
-    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"go_to_url.js"),text=text)
+def go_to_url(web_driver,url):
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"go_to_url.js"),f"Go to {url}")
+
+def refresh(web_driver):
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"show_text.js"),text="refresh the page")
+
+def go_back_a_page(web_driver):
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"show_text.js"),text="you should go back a page")
+
+def hit_a_key(web_driver,key):
+    action_with_js_code(web_driver,os.path.join(CURRENT_PATH,"show_text.js"),text=f"you should hit {key}")

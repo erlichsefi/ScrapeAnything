@@ -1,5 +1,5 @@
-from selenium.webdriver.common.action_chains import ActionChains
 from .tool import ToolInterface
+from .draw import refresh,go_back_a_page
 
 class GoBack(ToolInterface):
     """go back to previous page"""
@@ -11,11 +11,9 @@ class GoBack(ToolInterface):
         # Simulate clicking the browser's "Next" button
         web_driver.back()
 
-def change_url_twice(web_driver,first_page,second_page):
-  web_driver.get(first_page)
-  web_driver.get(second_page)
-
-from selenium.webdriver.common.action_chains import ActionChains
+    def example(self, web_driver: object) -> None:
+        # Simulate clicking the browser's "Next" button
+        go_back_a_page(web_driver)
 
 class Refresh(ToolInterface):
     """go back to previous page"""
@@ -26,3 +24,7 @@ class Refresh(ToolInterface):
     def use(self, web_driver: object) -> None:
         # Simulate clicking the browser's "Next" button
         web_driver.refresh()
+
+    def example(self, web_driver: object) -> None:
+        # Simulate clicking the browser's "Next" button
+        refresh(web_driver)

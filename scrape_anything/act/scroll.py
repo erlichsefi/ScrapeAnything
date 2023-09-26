@@ -1,5 +1,5 @@
 from .tool import ToolInterface
-from .draw import scroll_right,scroll_down
+from .draw import scroll_right,scroll_down,scroll_up
 
 class ScrollDown(ToolInterface):
     """Scroll down the web page by half the screen height"""
@@ -38,6 +38,9 @@ class ScrollUp(ToolInterface):
 
         # Scroll up the web page
         web_driver.execute_script(f"window.scrollBy(0, -{scroll_distance});")
+
+    def example(self,web_driver: object) -> None:
+        scroll_up(web_driver)
 
 class ScrollRight(ToolInterface):
     """Scroll the web page to the right by half the screen width"""
