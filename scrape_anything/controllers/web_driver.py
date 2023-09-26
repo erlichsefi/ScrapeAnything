@@ -5,6 +5,7 @@ from ..act import *
 from .controller import Controller
 from .data_types import IncommingData
 from selenium.common.exceptions import WebDriverException
+import time
 
 class WebDriverController(Controller):
 
@@ -50,6 +51,8 @@ class WebDriverController(Controller):
         if tool_executor.is_click_on_screen():
             draw_on_screen(self.web_driver,f"{output_folder}/step_{str(num_loops)}",**tool_input)
         try:
+            tool_executor.example(self.web_driver,**tool_input)
+            time.sleep(4)
             tool_executor.use(self.web_driver,**tool_input)
         except WebDriverException as e:
             message_without_session_id = str(e).split("\n")[0]
