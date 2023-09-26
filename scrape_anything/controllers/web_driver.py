@@ -22,25 +22,16 @@ class WebDriverController(Controller):
 
     def fetch_infomration_on_screen(self,output_folder:str,loop_num:int):
         # compute the elements on screen, current + change
-        raw_on_screen, viewpointscroll,viewportHeight,width_scroll,height_scroll = get_screen_information(self.web_driver)
-
+        raw_on_screen, viewpointscroll,viewportHeight,scroll_width,scroll_height = get_screen_information(self.web_driver)
         # get screen size
         width,height = get_screen_size(self.web_driver)
-        screen_size = f"width={width},height={height}"
-        scroll_ratio = f"On the Width Axis, {width_scroll}. On the Height Axis, {height_scroll}"
+        url = get_url(self.web_driver)
+
 
         file_name_png = web_driver_to_image(self.web_driver,f"{output_folder}/step_{loop_num+1}")
         file_name_html = web_driver_to_html(self.web_driver,f"{output_folder}/step_{loop_num+1}")
 
-        # store the raw elements before processing
-        raw_on_screen.to_csv(f"{output_folder}/step_{loop_num+1}_raw.csv")
-        # minimize the data sent to the llm + enrich
-        on_screen = minimize_and_enrich_page_data(raw_on_screen,viewpointscroll,viewportHeight,file_name_png)
-        # store the minimized elements 
-        on_screen.to_csv(f"{output_folder}/step_{loop_num+1}_minimized.csv",index=False)
-
-        url = get_url(self.web_driver)
-        return on_screen,viewpointscroll,viewportHeight,screen_size,file_name_png,file_name_html,scroll_ratio,url
+        return self.process_screen_data(raw_on_screen,scroll_width,scroll_height,width,height,output_folder,viewpointscroll,viewportHeight,url,loop_num,file_name_png=file_name_png,file_name_html=file_name_html)
     
 
     def take_action(self,tool_executor:ToolInterface,tool_input:str,num_loops:int,output_folder:str):
