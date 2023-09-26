@@ -122,6 +122,6 @@ def get_scroll_options(web_driver):
 def get_screen_size(web_driver):
     logs = run_js_code(web_driver,os.path.join(CURRENT_PATH,"get_window_size.js"))
     assert len(logs) == 2
-    window_size_width = int(logs[0])
-    window_size_height = int(logs[1])
+    window_size_width = logs[0]
+    window_size_height = logs[1]
     return window_size_width,window_size_height

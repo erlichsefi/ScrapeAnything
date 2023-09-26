@@ -38,4 +38,4 @@ function getScrollInfo() {
     }, 1000); // Wait for a brief moment
   }
   
-  getScrollInfo();  
+console.log(getScrollInfo());

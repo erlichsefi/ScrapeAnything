@@ -37,5 +37,4 @@ function getScrollHeightInfo() {
     }, 1000); // Wait for a brief moment
   }, 1000); // Wait for a brief moment
 }
-
-getScrollHeightInfo();
+console.log(getScrollHeightInfo());
