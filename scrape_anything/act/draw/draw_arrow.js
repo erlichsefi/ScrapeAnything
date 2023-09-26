@@ -1,33 +1,41 @@
-function draw_arrow(x,y,text){
-    // Create the arrow element
-    var arrowElement = document.createElement("div");
-    arrowElement.style.position = "absolute";
-    arrowElement.style.left = x + "px";
-    arrowElement.style.top = y + "px";
-    arrowElement.style.width = "0";
-    arrowElement.style.height = "0";
-    arrowElement.style.pointerEvents = "none";
-    arrowElement.style.zIndex = 2147483647;
+// Create the scroll indicator container element
+const indicatorContainer = document.createElement('div');
+indicatorContainer.style.position = 'fixed';
+indicatorContainer.style.top = `{y}px`; // Use the provided y coordinate
+indicatorContainer.style.left = `{x}px`; // Use the provided x coordinate
+indicatorContainer.style.transform = 'translate(-50%, -50%)'; // Center the container
+indicatorContainer.style.textAlign = 'center';
+indicatorContainer.style.zIndex = '1000';
 
-    // Create an arrow pointing up with CSS borders
-    arrowElement.style.borderLeft = "20px solid transparent";
-    arrowElement.style.borderRight = "20px solid transparent";
-    arrowElement.style.borderBottom = "40px solid red";  // Adjust the color and dimensions as needed
+// Create the arrow element for scrolling right
+const arrow = document.createElement('div');
+arrow.style.width = '30px';
+arrow.style.height = '30px';
+arrow.style.border = 'solid #fff';
+arrow.style.borderWidth = '3px 3px 0 0'; // Adjust border to point right
+arrow.style.transform = 'rotate(45deg)'; // Rotate to point right
+arrow.style.display = 'inline-block';
+arrow.style.marginLeft = '10px'; // Adjust margin for spacing
 
-    document.body.appendChild(arrowElement);
+// Create the text element
+const text = document.createElement('p');
+text.style.color = '#fff';
+text.style.fontSize = '16px';
+text.textContent = '{text}';
 
-    if (text) {
-        // Create the text element
-        var textElement = document.createElement("div");
-        textElement.style.position = "absolute";
-        textElement.style.left = x - 20 + "px"; // Adjust the horizontal position for centering
-        textElement.style.top = (y + 40) + "px"; // Adjust the vertical position for centering
-        textElement.textContent = text; // Replace with your desired text
-        textElement.style.textAlign = "center"; // Center the text horizontally
-        textElement.style.zIndex = 2147483647;
+// Add the indicator elements to the container
+indicatorContainer.appendChild(arrow);
+indicatorContainer.appendChild(text);
 
-        document.body.appendChild(textElement);
-    }
+// Add the indicator to the document body
+document.body.appendChild(indicatorContainer);
+
+// Function to remove the indicator after a certain delay (e.g., 3 seconds)
+function removeIndicator() {
+    indicatorContainer.style.display = 'none';
 }
 
-draw_arrow({x},{y},{text})
+
+indicatorContainer.style.top = `{y}px`; // Use the provided y coordinate
+indicatorContainer.style.left = `{x}px`; // Use the provided x coordinate
+setTimeout(removeIndicator, 3000); // Adjust the delay as needed
