@@ -18,6 +18,28 @@ def start_browesr(dockerized=True,headless=False,selenium_host="host.docker.inte
   service = Service(executable_path=r'/usr/bin/chromedriver')
   return webdriver.Chrome(service=service,options=chrome_options)
 
+
+def clear_sessions(selenium_host="host.docker.internal",session_id=None):
+    """
+    Here we query and delete orphan sessions
+    docs: https://www.selenium.dev/documentation/grid/advanced_features/endpoints/
+    :return: None
+    """
+    import requests,json
+    url = f"http://{selenium_host}:4444"
+    if not session_id:
+        # delete all sessions
+        r = requests.get("{}/status".format(url))
+        data = json.loads(r.text)
+        for node in data['value']['nodes']:
+            for slot in node['slots']:
+                if slot['session']:
+                    id = slot['session']['sessionId']
+                    r = requests.delete("{}/session/{}".format(url, id))
+    else:
+        # delete session from params
+        r = requests.delete("{}/session/{}".format(url, session_id))
+
 def load_script(filepath):
   with open(filepath, 'r', encoding='utf-8') as f:
       return "".join(f.readlines())

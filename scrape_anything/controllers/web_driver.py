@@ -11,6 +11,8 @@ class WebDriverController(Controller):
 
     def __init__(self,url,cache_to_pickle=False) -> None:
         try:
+
+            clear_sessions(selenium_host="selenium-chrome")
             self.web_driver = start_browesr(selenium_host="selenium-chrome")
             self.web_driver.set_window_size(1024, 768)
             self.web_driver.get(url)
@@ -30,6 +32,7 @@ class WebDriverController(Controller):
 
         if self.cache_to_pickle:
             self.pickle(
+                output_folder=output_folder,loop_num=loop_num,
                 raw_on_screen=raw_on_screen,
                 viewpointscroll=viewpointscroll,
                 viewportHeight=viewportHeight,
