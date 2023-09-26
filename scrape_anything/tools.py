@@ -5,12 +5,15 @@ from scrape_anything.browser import *
 from scrape_anything.view import *
 from scrape_anything.think import get_stop_patterns,get_final_answer_token
 from scrape_anything.act import *
+from scrape_anything.controllers import EnabledActions
 
 class ToolBox(BaseModel):
     final_answer_token:str = get_final_answer_token()
-    tools: List[ToolInterface] = [ClickOnCoordinates(),EnterText(),GoBack(),ScrollRight(),ScrollUp(),ScrollDown(),Refresh(),HitAKey()]
+    supoorted_tools: List[ToolInterface] = [ClickOnCoordinates(),EnterText(),GoBack(),ScrollRight(),ScrollUp(),ScrollDown(),Refresh(),HitAKey()]
+    tools: List[ToolInterface] = EnabledActions.filter_enabled(supoorted_tools)
     stop_pattern: List[str] = get_stop_patterns()
     
+
     @property
     def tool_description(self) -> str:
         return "\n".join([f"{tool.name}: {tool.description}" for tool in self.tools])

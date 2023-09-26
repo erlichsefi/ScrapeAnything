@@ -23,11 +23,25 @@ class IncommingData:
         self.task = task
 
 
+from enum import Enum
+class EnabledActions(Enum):
+    ClickOnCoordinates = 0
+    EnterText = 1 
+    GoBack = 2 
+    ScrollRight = 3
+    ScrollUp = 4
+    ScrollDown = 5
+    Refresh = 6 
+    HitAKey = 7
+
+    def filter_enabled(possible_tools):
+        return list(filter(lambda x: type(x).__name__ in EnabledActions.__members__.keys(),possible_tools))
 
     
 class OutGoingData:
 
     def __init__(self,description:str,**kwarg) -> None:
+        #client_enum = Actions.
         description:str = description
         kwarg = kwarg
    
