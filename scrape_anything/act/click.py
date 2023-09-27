@@ -34,4 +34,4 @@ class EnterText(ToolInterface):
 
 
     def example(self,web_driver: object, x:float ,y:float, text: str) -> None:
-      draw_arrow(web_driver,x,y, f"enter '{text}' here")
+        draw_arrow(web_driver,x,y, f"enter '{text}' here")

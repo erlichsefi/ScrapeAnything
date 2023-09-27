@@ -62,8 +62,12 @@ def extract_with_js_code(wd,filepath):
 
 def action_with_js_code(wd,filepath,**kwarg):
   script = load_script(filepath)
-  script = script.format(**kwarg)
-  return wd.execute_script(script)
+  for key in kwarg:
+     script = script.replace(f"{{{key}}}",kwarg[key])
+  
+  wd.execute_script(f"""
+  {script}
+  """)
 
 
 def web_driver_to_image(wd,file_name):
