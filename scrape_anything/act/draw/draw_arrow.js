@@ -5,7 +5,7 @@ indicatorContainer.style.top = `{y}px`; // Use the provided y coordinate
 indicatorContainer.style.left = `{x}px`; // Use the provided x coordinate
 indicatorContainer.style.transform = 'translate(-50%, -50%)'; // Center the container
 indicatorContainer.style.textAlign = 'center';
-indicatorContainer.style.zIndex = '1000';
+indicatorContainer.style.zIndex = 2147483647;
 
 // Create the arrow element for scrolling right
 const arrow = document.createElement('div');

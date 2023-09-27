@@ -7,7 +7,7 @@ indicatorContainer.style.left = '20px'; // Position on the left side
 indicatorContainer.style.top = '50%'; // Vertically center the indicator
 indicatorContainer.style.transform = 'translateY(-50%)'; // Vertically center the indicator
 indicatorContainer.style.textAlign = 'center';
-indicatorContainer.style.zIndex = '1000';
+indicatorContainer.style.zIndex = 2147483647;
 
 // Create the arrow element for scrolling left
 const arrow = document.createElement('div');

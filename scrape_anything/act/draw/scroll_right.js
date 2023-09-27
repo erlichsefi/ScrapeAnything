@@ -8,7 +8,7 @@ indicatorContainer.style.top = 3*(window.innerHeight / 6) + 'px'; // Position at
 indicatorContainer.style.right = (window.innerHeight / 6) +'px'; // Position on the right side
 indicatorContainer.style.transform = 'translateY(-50%)';
 indicatorContainer.style.textAlign = 'center';
-indicatorContainer.style.zIndex = '1000';
+indicatorContainer.style.zIndex = 2147483647;
 
 // Create the arrow element for scrolling right
 const arrow = document.createElement('div');

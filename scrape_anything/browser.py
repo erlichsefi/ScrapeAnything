@@ -63,7 +63,7 @@ def extract_with_js_code(wd,filepath):
 def action_with_js_code(wd,filepath,**kwarg):
   script = load_script(filepath)
   for key in kwarg:
-     script = script.replace(f"{{{key}}}",kwarg[key])
+     script = script.replace(f"{{{key}}}",str(kwarg[key]))
   
   wd.execute_script(f"""
   {script}

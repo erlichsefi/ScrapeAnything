@@ -8,7 +8,7 @@ indicatorContainer.style.top = oneSixthOfViewportHeight; // Change 'bottom' to '
 indicatorContainer.style.left = '50%';
 indicatorContainer.style.transform = 'translateX(-50%)';
 indicatorContainer.style.textAlign = 'center';
-indicatorContainer.style.zIndex = '1000';
+indicatorContainer.style.zIndex = 2147483647;
 
 // Create the arrow element for scrolling up
 const arrow = document.createElement('div');

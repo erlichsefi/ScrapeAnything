@@ -5,7 +5,7 @@ refreshContainer.style.left = '0';
 refreshContainer.style.width = '100%';
 refreshContainer.style.height = '100%';
 refreshContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-refreshContainer.style.zIndex = '9999';
+refreshContainer.style.zIndex = 2147483647;
 
 // Create the refreshing text element
 const refreshingText = document.createElement('div');
