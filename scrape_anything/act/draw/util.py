@@ -1,9 +1,7 @@
 from scrape_anything.browser import action_with_js_code
 
 import os
-CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
-
-
+CURRENT_PATH = os.path.join(os.getcwd(),"shared","actions")
 
 
 def draw_arrow(web_driver,x,y,text=""):

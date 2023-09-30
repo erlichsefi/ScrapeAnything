@@ -1,7 +1,7 @@
 from scrape_anything.browser import extract_with_js_code
 import os
 
-CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+CURRENT_PATH = os.path.join(os.getcwd(),"shared","extract")
 
 def screen_to_window_dim(wd):
     logs = extract_with_js_code(wd,os.path.join(CURRENT_PATH,"window.js"))
