@@ -1,5 +1,4 @@
 from .tool import ToolInterface
-from .draw import go_to_url
 
 class GoToURL(ToolInterface):
   """ Go to a specific url address """

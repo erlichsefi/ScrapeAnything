@@ -5,7 +5,7 @@ class GoBack(ToolInterface):
 
     name:str = "Go Back"
     description:str = "Go back to the previous page,no input."
-    example_script = "show_text.js"
+    example_script:str = "show_text.js"
 
 
     def use(self, web_driver: object) -> None:
@@ -26,7 +26,7 @@ class Refresh(ToolInterface):
 
     name:str = "Refresh page"
     description:str = "refresh the current page,no input."
-    example_script = "show_text.js"
+    example_script:str  = "show_text.js"
 
     def use(self, web_driver: object) -> None:
         # Simulate clicking the browser's "Next" button

@@ -1,12 +1,11 @@
 from .tool import ToolInterface
-from .draw import scroll_right,scroll_down,scroll_up
 
 class ScrollDown(ToolInterface):
     """Scroll down the web page by half the screen height"""
 
     name:str = "Scroll Down"
     description:str = "Scroll down the web page by half the screen height, no input."
-    example_script = "scroll_down.js"
+    example_script:str  = "scroll_down.js"
 
     def use(self, web_driver: object) -> None:
         # Get the height of the web page
@@ -27,7 +26,7 @@ class ScrollUp(ToolInterface):
 
     name:str = "Scroll Up"
     description:str = "Scroll up the web page by half the screen height, no input."
-    example_script = "scroll_up.js"
+    example_script:str  = "scroll_up.js"
 
     def use(self, web_driver: object) -> None:
         # Get the height of the viewport
@@ -44,7 +43,7 @@ class ScrollRight(ToolInterface):
 
     name :str= "Scroll Right"
     description:str = "Scroll the web page to the right by half the screen width, no input"
-    example_script = "scroll_right.js"
+    example_script:str  = "scroll_right.js"
     
     def use(self, web_driver: object) -> None:
         # Get the width of the viewport
