@@ -3,7 +3,7 @@ from ..view import *
 from ..think import *
 from ..act import *
 from .controller import Controller
-from .data_types import IncommingData,OutGoingData
+from .data_types import IncommingData,OutGoingData,EnabledActions
 from queue import Queue
 
 
@@ -25,10 +25,12 @@ class RemoteFeedController(Controller):
 
     
 
-    def take_action(self,tool_executor:ToolInterface,tool_input:str,num_loops:int,output_folder:str):
+    def take_action(self,tool_executor:ToolInterface,tool_input,num_loops:int,output_folder:str):
 
         self.outgoing_data_queue.put(OutGoingData(description=tool_executor.description,
-                                                  **tool_input))
+                                                  tool_enum=EnabledActions.get_tool_enum(tool_executor),
+                                                  example_script=tool_executor.example_script,
+                                                  tool_input=tool_executor.process_tool_arg(**tool_input)))
 
         
     def unpickle(self, output_folder, loop_num):

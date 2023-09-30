@@ -6,7 +6,7 @@ import os
 import glob
 
 user_task = "log in to my account,user name is 'erlichsefi@gmail.com', password is '1234567'"
-experiment = "outputs/16_02_14_2023_09_26x6fb55dca_e942_4426_861c_75d312cedeb3"
+experiment = "outputs/08_23_18_2023_09_30x1d50316f_f6dc_4737_a434_98c6c26afc14"
 
 
 feed_from_chrome = Queue(maxsize=1)
@@ -22,6 +22,7 @@ agnet = Agent(llm=ChatLLM(),max_loops=1)
 thread = agnet.run_parallel(controller,task_to_accomplish=user_task)
 
 call_to_action = feed_from_agent.get()
+print(call_to_action)
 
 thread.stop()
     

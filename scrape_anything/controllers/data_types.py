@@ -34,14 +34,18 @@ class EnabledActions(Enum):
     Refresh = 6 
     HitAKey = 7
 
+    def get_tool_enum(tool):
+        return type(tool).__name__
+
     def filter_enabled(possible_tools):
-        return list(filter(lambda x: type(x).__name__ in EnabledActions.__members__.keys(),possible_tools))
+        return list(filter(lambda x: EnabledActions.get_tool_enum(x) in EnabledActions.__members__.keys(),possible_tools))
 
     
 class OutGoingData:
 
-    def __init__(self,description:str,**kwarg) -> None:
-        #client_enum = Actions.
-        description:str = description
-        kwarg = kwarg
+    def __init__(self,description:str,tool_enum:str, example_script:str,tool_input) -> None:
+        self.example_script = example_script
+        self.description = description
+        self.tool_enum = tool_enum
+        self.tool_input = tool_input
    
