@@ -13,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

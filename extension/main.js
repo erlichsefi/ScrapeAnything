@@ -1,21 +1,21 @@
-const form = document.getElementById("objective-form");
-const objectiveInput = document.getElementById("objective");
-const submitButton = document.getElementById("submit");
-const loadingEl = document.getElementById("loading");
-const historyEl = document.getElementById("history");
-const errorEl = document.getElementById("error");
-const clearHistoryEl = document.getElementById("clear-history");
-const pre = document.getElementById("html");
+// const form = document.getElementById("objective-form");
+// const objectiveInput = document.getElementById("objective");
+// const submitButton = document.getElementById("submit");
+// const loadingEl = document.getElementById("loading");
+// const historyEl = document.getElementById("history");
+// const errorEl = document.getElementById("error");
+// const clearHistoryEl = document.getElementById("clear-history");
+// const pre = document.getElementById("html");
 
-const debugGetBrowserContent = document.getElementById(
-  "debug-get-browser-content"
-);
-const debugForm = document.getElementById("debug-form");
-const debugId = document.getElementById("debug-id");
-const debugAction = document.getElementById("debug-action");
-const debugValue = document.getElementById("debug-value");
+// const debugGetBrowserContent = document.getElementById(
+//   "debug-get-browser-content"
+// );
+// const debugForm = document.getElementById("debug-form");
+// const debugId = document.getElementById("debug-id");
+// const debugAction = document.getElementById("debug-action");
+// const debugValue = document.getElementById("debug-value");
 
-objectiveInput.focus();
+// objectiveInput.focus();
 
 /** @type Command[] */
 const getCurrentTab = async () => {
@@ -55,7 +55,7 @@ const getCurrentTab = async () => {
 //       id: debugId.value,
 //     }),
 //   });
-});
+// });
 
 // clearHistoryEl.addEventListener("click", async () => {
 //   commandHistory.splice(0, commandHistory.length);
