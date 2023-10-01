@@ -1,21 +1,7 @@
-// const form = document.getElementById("objective-form");
-// const objectiveInput = document.getElementById("objective");
-// const submitButton = document.getElementById("submit");
-// const loadingEl = document.getElementById("loading");
-// const historyEl = document.getElementById("history");
-// const errorEl = document.getElementById("error");
-// const clearHistoryEl = document.getElementById("clear-history");
-// const pre = document.getElementById("html");
-
-// const debugGetBrowserContent = document.getElementById(
-//   "debug-get-browser-content"
-// );
-// const debugForm = document.getElementById("debug-form");
-// const debugId = document.getElementById("debug-id");
-// const debugAction = document.getElementById("debug-action");
-// const debugValue = document.getElementById("debug-value");
-
-// objectiveInput.focus();
+const form = document.getElementById("objective-form");
+const objectiveInput = document.getElementById("objective");
+const submitButton = document.getElementById("submit");
+const errorEl = document.getElementById("error");
 
 /** @type Command[] */
 const getCurrentTab = async () => {
@@ -93,7 +79,7 @@ form.addEventListener("submit", async (e) => {
   const tabId = currentTab.id;
   
   let commandResponse = {};
-  const objective = objectiveInput.value;
+  const objective =  objectiveInput.value;
 
   try {
     const elements = await chrome.tabs.sendMessage(tabId, {

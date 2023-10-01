@@ -1,4 +1,20 @@
 // main.test.js
+const { JSDOM } = require('jsdom');
+
+let window;
+let document;
+
+beforeAll(() => {
+  const dom = new JSDOM('<!doctype html><html><body></body></html>');
+  window = dom.window;
+  document = window.document;
+});
+
+afterAll(() => {
+  // Clean up resources after the tests
+  window.close();
+});
+
 const { getCurrentTab } = require('./main'); // Import the functions to be tested
 
 describe('getCurrentTab', () => {

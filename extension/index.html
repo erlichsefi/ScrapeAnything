@@ -1,10 +1,29 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>BrowseGPT</title>
-    <link href="/main.css" rel="stylesheet"></link>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="main-vue.js" type="module"></script>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <title>Your Static App</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+    <div id="app">
+        <form id="objective-form" onsubmit="submitForm(event)">
+            <label for="objective">Instruction</label>
+            <br>
+            <textarea id="objective"></textarea>
+            <button type="submit" id="submit">Submit</button>
+        </form>
+        <div id="error"></div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            console.log("!")
+        }
+    </script>
+</body>
 </html>
+
+
+
+

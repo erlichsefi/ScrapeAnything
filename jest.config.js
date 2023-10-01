@@ -1,4 +1,4 @@
-// jest.config.js
-module.exports = {
-  testMatch: ['/extension/**.test.js'],
-};
+// // jest.config.js
+// module.exports = {
+//   testMatch: ['/extension/**.test.js'],
+// };
