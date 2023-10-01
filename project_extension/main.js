@@ -32,41 +32,41 @@ const getCurrentTab = async () => {
 };
 
 
-debugGetBrowserContent.addEventListener("click", async (e) => {
-  const currentTab = await getCurrentTab();
-  const tabId = currentTab.id;
-  /** @type BrowserContent */
-  const browserContent = await chrome.tabs.sendMessage(tabId, {
-    message: "get_browser_content",
-  });
-  const { html } = browserContent;
-  pre.innerText = html;
+// debugGetBrowserContent.addEventListener("click", async (e) => {
+//   const currentTab = await getCurrentTab();
+//   const tabId = currentTab.id;
+//   /** @type BrowserContent */
+//   const browserContent = await chrome.tabs.sendMessage(tabId, {
+//     message: "get_browser_content",
+//   });
+//   const { html } = browserContent;
+//   pre.innerText = html;
+// });
+
+// debugForm.addEventListener("submit", async (e) => {
+//   e.preventDefault();
+//   const currentTab = await getCurrentTab();
+//   const tabId = currentTab.id;
+//   chrome.tabs.sendMessage(tabId, {
+//     message: "run_command",
+//     command: JSON.stringify({
+//       action: debugAction.value,
+//       value: debugValue.value,
+//       id: debugId.value,
+//     }),
+//   });
 });
 
-debugForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const currentTab = await getCurrentTab();
-  const tabId = currentTab.id;
-  chrome.tabs.sendMessage(tabId, {
-    message: "run_command",
-    command: JSON.stringify({
-      action: debugAction.value,
-      value: debugValue.value,
-      id: debugId.value,
-    }),
-  });
-});
-
-clearHistoryEl.addEventListener("click", async () => {
-  commandHistory.splice(0, commandHistory.length);
-  renderHistory();
-  pre.innerHTML = "";
-  errorEl.innerHTML = "";
-  const currentTab = await getCurrentTab();
-  chrome.tabs.sendMessage(currentTab.id, {
-    message: "clear_history",
-  });
-});
+// clearHistoryEl.addEventListener("click", async () => {
+//   commandHistory.splice(0, commandHistory.length);
+//   renderHistory();
+//   pre.innerHTML = "";
+//   errorEl.innerHTML = "";
+//   const currentTab = await getCurrentTab();
+//   chrome.tabs.sendMessage(currentTab.id, {
+//     message: "clear_history",
+//   });
+// });
 
 objectiveInput.addEventListener("keydown", (e) => {
   if (e.which === 13 && !e.shiftKey) {
