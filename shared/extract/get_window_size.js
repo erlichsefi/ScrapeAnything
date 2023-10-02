@@ -5,6 +5,6 @@ function getWindowSize() {
     return { width, height };
   }
   
-  const windowSize = getWindowSize();
-  console.log(`${windowSize.width}px`);
-  console.log(`${windowSize.height}px`);
+const windowSize = getWindowSize();
+console.log(`${windowSize.width}px`);
+console.log(`${windowSize.height}px`);
