@@ -1,4 +1,4 @@
-function getScrollInfo() {
+function getScrolWidthInfo() {
     const initialScrollPosition = window.pageXOffset;
   
     // Scroll right a bit

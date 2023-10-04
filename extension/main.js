@@ -38,27 +38,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       const elements = await chrome.tabs.sendMessage(tabId, {
-        message: "elements",
+        message: "extract",
+        script: "elements",
       });
 
       const url = await chrome.tabs.sendMessage(tabId, {
-        message: "get_url",
+        message: "extract",
+        script: "get_url",
       });
 
       const {viewpointscroll,viewportHeight} = await chrome.tabs.sendMessage(tabId, {
-        message: "window",
+        message: "extract",
+        script: "window",
       });
 
       const {scroll_width} = await chrome.tabs.sendMessage(tabId, {
-        message: "scroll_width",
+        message: "extract",
+        script: "scroll_width",
       })
 
       const {scroll_height} = await chrome.tabs.sendMessage(tabId, {
-        message: "scroll_height",
+        message: "extract",
+        script: "scroll_height",
       })
 
       const {width,height} = await chrome.tabs.sendMessage(tabId, {
-        message: "get_window_size",
+        message: "extract",
+        script: "get_window_size",
       })
       
       console.log(elements)

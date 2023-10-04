@@ -1,30 +1,29 @@
-const runCommand = async (commandJson) => {
-  try {
-    
-    const command = JSON.parse(commandJson);
-    const { script, args } = command.action;
-    // we may need the make the script work like this
-    var actionHint = new Function("shared/actions/"+script + '("' + args + '");');
-    actionHint()
-  } catch (e) {
-    console.error(e);
-  }
-};
+import call_action from './shared/index.js'
+import call_extract from './shared/index.js'
 
 chrome.runtime.onMessage.addListener((req, sender, res) => {
   if (req.message === "run_command") {
-    runCommand(req);
-  } else {
-    console.debug("Running"+req.message);
-    var actionHint = new Function("shared/extract/"+req.message+';');
-    console.debug("Res:"+actionHint);
-    var response = actionHint()
+    
+    //  offer a action
+    console.debug("Running"+req.script+" "+req.args);
+    var response = call_action(req.script,req.args);
+    console.debug("Res:"+response);
     res({
       response:response
-  });
-    res({
-      url: browserContent.url,
-      html: browserContent.html,
     });
+  
+  } else if (req.message === "extract") {
+
+    // get information about the screen
+    console.debug("Running"+req.script+" "+req.args);
+    var response = call_extract(req.script,req.args);
+    console.debug("Res:"+response);
+    res({
+      response:response
+    });
+  }
+  else {
+    throw new Error('message '+req.message+" is not defined.");
+
   }
 });
