@@ -1,29 +1,31 @@
-import call_action from './shared/index.js'
-import call_extract from './shared/index.js'
+import {call_action,call_extract} from './shared/entry.js'
 
-chrome.runtime.onMessage.addListener((req, sender, res) => {
-  if (req.message === "run_command") {
+export function main() {
+
+  chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
+    if (req.message === "run_command") {
+
+      //  offer a action
+      console.log("Running command script: "+req.script+" with args: "+req.args);
+      var response = call_action(req.script,req.args);
+      console.log("Response from script"+req.script+" is: "+response);
+      sendResponse({
+       response
+      });
     
-    //  offer a action
-    console.debug("Running"+req.script+" "+req.args);
-    var response = call_action(req.script,req.args);
-    console.debug("Res:"+response);
-    res({
-      response:response
-    });
-  
-  } else if (req.message === "extract") {
+    } else if (req.message === "extract") {
 
-    // get information about the screen
-    console.debug("Running"+req.script+" "+req.args);
-    var response = call_extract(req.script,req.args);
-    console.debug("Res:"+response);
-    res({
-      response:response
-    });
-  }
-  else {
-    throw new Error('message '+req.message+" is not defined.");
+      // get information about the screen
+      console.log("Running extraction script: "+req.script+" with args: "+req.args);
+      call_extract(req.script).then(response => {
+          console.log("Response from script " + req.script + " is: " + response);
+          sendResponse(response);
+          console.log("sent")
+        });
+    }
+    else {
+      throw new Error('message '+req.message+" is not defined.");
 
-  }
-});
+    }
+  });
+}

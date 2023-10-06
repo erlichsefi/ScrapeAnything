@@ -5,7 +5,9 @@
   "manifest_version": 3,
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": [ "content.js"]
+    "js": [
+      "content_main.js"
+    ]
   }],
   "action": {
     "default_icon": "icons/icon.png"
@@ -22,5 +24,19 @@
   "permissions": [
     "activeTab",
     "tabs"
+  ],
+  "web_accessible_resources":[
+    {
+      "resources": [
+        "content.js",
+        "shared/entry.js",
+        "shared/extract/*.js",
+        "shared/actions/*.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "extension_ids": []
+    }
   ]
 }

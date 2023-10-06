@@ -1,4 +1,4 @@
-function go_to_url(url){
+export default  function go_to_url(url){
     // Calculate the size for arrow and text
     const oneSixthOfViewportHeight = (window.innerHeight / 6) + 'px';
 

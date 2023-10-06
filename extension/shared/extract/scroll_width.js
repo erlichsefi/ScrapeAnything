@@ -1,6 +1,7 @@
-function getScrolWidthInfo() {
+export default function getScrolWidthInfo() {
+  return new Promise((resolve, reject) => {
     const initialScrollPosition = window.pageXOffset;
-  
+    let res = ""
     // Scroll right a bit
     window.scrollBy(100, 0);
   
@@ -23,19 +24,22 @@ function getScrolWidthInfo() {
           // Scroll back to the initial position
           window.scrollTo(initialScrollPosition, 0);
   
+          
           // Compare the scroll positions
           if (scrollRightPosition > initialScrollPosition && scrollLeftPosition < initialScrollPosition) {
-            console.log("Client can scroll both left and right!");
+            res = "Client can scroll both left and right!";
           } else if (scrollRightPosition > initialScrollPosition) {
-            console.log("Client can scroll right!");
+            res = "Client can scroll right!";
           } else if (scrollLeftPosition < initialScrollPosition) {
-            console.log("Client can scroll left!");
+            res = "Client can scroll left!";
           } else {
-            console.log("Client cannot scroll either left or right!");
+            res = "Client cannot scroll either left or right!";
           }
+          resolve(res);
         }, 1000); // Wait for a brief moment
       }, 1000); // Wait for a brief moment
     }, 1000); // Wait for a brief moment
-  }
+  });
+}
   
-console.log(getScrollInfo());
+// console.log(getScrollInfo());

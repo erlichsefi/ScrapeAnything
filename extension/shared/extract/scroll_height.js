@@ -1,6 +1,7 @@
-function getScrollHeightInfo() {
-  const initialScrollPosition = window.pageYOffset;
+export default async function getScrollHeightInfo() {
 
+  return new Promise((resolve, reject) => {
+  const initialScrollPosition = window.pageYOffset;
   // Scroll down a bit
   window.scrollBy(0, 100);
 
@@ -22,19 +23,22 @@ function getScrollHeightInfo() {
 
         // Scroll back to the initial position
         window.scrollTo(0, initialScrollPosition);
-
+        
+        let res = ""
         // Compare the scroll positions
         if (scrollDownPosition > initialScrollPosition && scrollUpPosition < initialScrollPosition) {
-          console.log("Client can scroll both up and down!");
+          res = "Client can scroll both up and down!";
         } else if (scrollDownPosition > initialScrollPosition) {
-          console.log("Client can scroll down!");
+          res = "Client can scroll down!";
         } else if (scrollUpPosition < initialScrollPosition) {
-          console.log("Client can scroll up!");
+          res = "Client can scroll up!";
         } else {
-          console.log("Client cannot scroll either up or down!");
+          res = "Client cannot scroll either up or down!";
         }
+        resolve(res);
       }, 1000); // Wait for a brief moment
     }, 1000); // Wait for a brief moment
   }, 1000); // Wait for a brief moment
+  });
 }
-console.log(getScrollHeightInfo());
+// console.log(getScrollHeightInfo());

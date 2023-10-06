@@ -1,4 +1,4 @@
-function draw_arrow(text,x,y){
+export default function draw_arrow(text,x,y){
 
     // Create the scroll indicator container element
     const indicatorContainer = document.createElement('div');
@@ -20,14 +20,14 @@ function draw_arrow(text,x,y){
     arrow.style.marginLeft = '10px'; // Adjust margin for spacing
 
     // Create the text element
-    const text = document.createElement('p');
-    text.style.color = '#fff';
-    text.style.fontSize = '16px';
-    text.textContent = text;
+    const text_field = document.createElement('p');
+    text_field.style.color = '#fff';
+    text_field.style.fontSize = '16px';
+    text_field.textContent = text;
 
     // Add the indicator elements to the container
     indicatorContainer.appendChild(arrow);
-    indicatorContainer.appendChild(text);
+    indicatorContainer.appendChild(text_field);
 
     // Add the indicator to the document body
     document.body.appendChild(indicatorContainer);

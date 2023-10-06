@@ -1,4 +1,4 @@
-function scroll_left(){
+export default  function scroll_left(){
     const oneSixthOfViewportHeight = (window.innerHeight / 6) + 'px';
 
     // Create the scroll indicator container element

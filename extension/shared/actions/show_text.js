@@ -1,4 +1,4 @@
-function show_text(text){
+export default function show_text(text){
     const refreshContainer = document.createElement('div');
     refreshContainer.style.position = 'fixed';
     refreshContainer.style.top = '0';
@@ -12,7 +12,7 @@ function show_text(text){
     const refreshingText = document.createElement('div');
     refreshingText.style.color = '#fff';
     refreshingText.style.fontSize = '24px';
-    refreshingText.textContent = text; // for the python format 
+    refreshingText.textContent = text; 
     refreshingText.style.position = 'absolute';
     refreshingText.style.top = '50%';
     refreshingText.style.left = '50%';
