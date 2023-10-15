@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^22.1.0"
   },
   "dependencies": {
