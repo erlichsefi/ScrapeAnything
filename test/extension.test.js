@@ -1,5 +1,7 @@
 // setup mocks
-require('fetch-mock').post('http://localhost:3000/process', {
+const fetchMock = require('fetch-mock');
+
+fetchMock.post('http://localhost:3000/process', {
     "body": JSON.stringify({
     "example_script": "show_text",
     "tool_input": {
