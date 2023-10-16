@@ -1,5 +1,8 @@
 // setup mocks
 const fetchMock = require('fetch-mock');
+let mockExtract;
+let mockCommand;
+let sendMessageMock;
 
 fetchMock.post('http://localhost:3000/process', {
     "body": JSON.stringify({
@@ -35,9 +38,9 @@ describe('Form Event Listener', () => {
     const event = new Event('DOMContentLoaded');
     document.dispatchEvent(event);  
 
-    let mockExtract = jest.fn().mockResolvedValue({})
-    let mockCommand = jest.fn().mockResolvedValue({})
-    let sendMessageMock = jest.fn().mockImplementation((tabId, message) => {
+    mockExtract = jest.fn().mockResolvedValue({})
+    mockCommand = jest.fn().mockResolvedValue({})
+    sendMessageMock = jest.fn().mockImplementation((tabId, message) => {
       if (message.message === 'extract') {
         return mockExtract();
       } else if (message.message === 'run_command') {
@@ -47,7 +50,7 @@ describe('Form Event Listener', () => {
     })
     global.chrome = {
         tabs: {
-          query: jest.fn().mockResolvedValue([{ id: 456 }]),
+          query: jest.fn().mockImplementation(({}) => {return [{ id: 456 }]}),
           sendMessage:sendMessageMock
         },
       };
