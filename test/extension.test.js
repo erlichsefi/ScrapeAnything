@@ -59,7 +59,7 @@ describe('Form Event Listener', () => {
     // wait the function will finish.
     await new Promise((resolve) => setTimeout(resolve, 0));
 
-    // Test that getCurrentTab was called and form elements were updated
+    // Make Sure all API are called and there is no failure.
     expect(errorEl.innerHTML).toBe('');
     expect(mockCommand).toHaveBeenCalledTimes(1);
     expect(mockExtract).toHaveBeenCalledTimes(6);
