@@ -13,7 +13,7 @@ const getCurrentTab = async () => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-
+  console.log('DOMContentLoaded event dispatched');
   const form = document.getElementById("objective-form");
   const objectiveInput = document.getElementById("objective");
   const submitButton = document.getElementById("submit");
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   form.addEventListener("submit", async (e) => {
+    console.log('submit event dispatched');
     e.preventDefault();
     submitButton.setAttribute("disabled", true);
     
