@@ -61,6 +61,7 @@ describe('Form Event Listener', () => {
 
     // Test that getCurrentTab was called and form elements were updated
     expect(errorEl.innerHTML).toBe('');
-    expect(mockExtract).toHaveBeenCalled();
+    expect(mockCommand).toHaveBeenCalledTimes(1);
+    expect(mockExtract).toHaveBeenCalledTimes(6);
   });
 });
