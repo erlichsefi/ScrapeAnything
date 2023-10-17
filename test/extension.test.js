@@ -20,7 +20,7 @@ fetchMock.post('http://localhost:3000/process', {
   }),
 });
 
-require('../main.js'); // Import the functions you want to test
+require('../extension/main.js'); // Import the functions you want to test
 
 describe('Form Event Listener', () => {
   let form;
