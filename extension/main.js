@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const tabId = currentTab.id;
-    const objective =  objectiveInput.value;
+    const objective = objectiveInput.value;
     let body = undefined;
 
     try{
