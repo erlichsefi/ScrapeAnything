@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
   padding: 0;
   margin: 0;
   color: #083592;
@@ -7,22 +6,29 @@ body {
   font-size: 100%;
 }
 
+#app {
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 #objective-form {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 #objective-form label {
-  display: inline-block;
-  width: 100%;
+  display: block;
   font-weight: 500;
   margin-bottom: 10px;
 }
 
 #objective-form textarea {
   width: 100%;
+  padding: 10px;
   margin-bottom: 10px;
-  border-color: #B2BEDF;
+  border: 1px solid #ccc;
   border-radius: 4px;
 }
 
@@ -31,44 +37,76 @@ body {
   background-color: #083592;
   border-radius: 10px;
   color: #EAEEF6;
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-weight: bold;
-}
-
-#submit:not(:disabled) {
   cursor: pointer;
 }
 
-#submit:not(:disabled):hover {
+#submit:hover {
   background-color: #072A72;
 }
 
 #submit:disabled {
   opacity: 0.8;
+  cursor: not-allowed;
 }
 
-#error {
-  display: inline-block;
+.error {
+  display: block;
   margin: 1rem 0;
   font-size: 14px;
+  color: #FF0000;
 }
 
-.hidden {
-  display: none !important;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-h3 {
-  font-size: 1rem;
-  font-weight: 500;
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-/* Additional styles for specific elements */
-#app {
-  padding: 20px;
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
 }
 
-#header {
-  padding: 2px 10px;
-  background-color: #e8eaf0;
-  border-bottom: 2px solid #b2bedf;
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #083592;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #083592;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
