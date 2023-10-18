@@ -1,0 +1,30 @@
+name: Zip extension
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Easy Zip Files
+        uses: vimtor/action-zip@v1.1
+        with:
+          # Files or directories to zip
+          files: extension
+          # Name of output zip file
+          dest: extension.zip
+          # Whether to add subdirectories to simply zip all files to the root
+          recursive: true
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Auto-commit by GitHub Actions"
+          git push
