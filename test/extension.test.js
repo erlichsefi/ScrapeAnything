@@ -56,7 +56,7 @@ describe('Form Event Listener', () => {
     };
   });
 
-  it('should handle form submission and call getCurrentTab', async () => {
+  it('should call extract for all elements, get response and call command', async () => {
     // Simulate form submission
     const event = new Event('submit', { bubbles: true, cancelable: true });
     form.dispatchEvent(event);

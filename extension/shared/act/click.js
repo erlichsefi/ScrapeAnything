@@ -1,10 +1,10 @@
-export default function click_coordinates(x,y){
+function click_coordinates(x,y){
     var element = document.elementFromPoint(x, y);
     // Click on the element
     element.click();
 };
 
-export default function click_coordinates_and_text(x,y,text){
+ function click_coordinates_and_text(x,y,text){
     var element = document.elementFromPoint(x, y);
 
     // Click on the element
@@ -16,7 +16,7 @@ export default function click_coordinates_and_text(x,y,text){
 
 
 
-export default function keyborad_action(text){
+function keyborad_action(text){
     if (text.toLowerCase() === "esc") {
         // For "esc" key press
         var event = new KeyboardEvent("keydown", {
@@ -32,3 +32,4 @@ export default function keyborad_action(text){
     }
 }
 
+module.exports = {click_coordinates,click_coordinates_and_text,keyborad_action};

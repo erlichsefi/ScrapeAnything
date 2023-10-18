@@ -6,7 +6,7 @@ export function main() {
     if (req.message === "run_command") {
       var execute_function = call_guide
       if (req.active == true ){
-        var execute_function = call_act
+        execute_function = call_act
       }
       //  present the user a guidance 
       console.log("Running command script: "+req.script+" with args: "+req.args);

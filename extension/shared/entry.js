@@ -22,7 +22,6 @@ function call_guide(function_name,args){
     else if (function_name == "click_coordinates"){
         return draw_arrow(args.x,args.y,"please click here")
     }
-    //
     else if (function_name == "go_to_url"){
         return go_to_url()
     }
@@ -98,7 +97,6 @@ async function call_act(function_name,args){
     else if (function_name == "click_coordinates"){
         return click_coordinates(args.x,args.y)
     }
-    //
     else if (function_name == "go_to_url"){
         return move_to_url()
     }
