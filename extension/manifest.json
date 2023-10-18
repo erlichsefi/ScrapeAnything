@@ -31,7 +31,8 @@
         "content.js",
         "shared/entry.js",
         "shared/extract/*.js",
-        "shared/actions/*.js"
+        "shared/guide/*.js",
+        "shared/act/*.js"
       ],
       "matches": [
         "<all_urls>"
