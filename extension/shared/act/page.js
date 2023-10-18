@@ -7,6 +7,6 @@ export default function back(){
     window.history.back();
 }
 
-export default function go_to_url(url){
+export default function move_to_url(url){
     window.location.href = url;
 }

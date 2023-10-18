@@ -1,4 +1,4 @@
-export default  function scroll_right(){
+export default  function point_scroll_right(){
     // Calculate the size for arrow and text
     const oneSixthOfViewportHeight = (window.innerHeight / 6) + 'px';
 

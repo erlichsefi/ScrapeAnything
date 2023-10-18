@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("objective-form");
   const objectiveInput = document.getElementById("objective");
   const submitButton = document.getElementById("submit");
+  const active = document.getElementById("active");
   const errorEl = document.getElementById("error");
 
 
@@ -107,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
         chrome.tabs.sendMessage(tabId, {
           message: "run_command",
+          active: active == true,
           script: command.example_script,
           args: command.tool_input, 
         });

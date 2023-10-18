@@ -1,4 +1,4 @@
-export default  function scroll_up(){
+export default  function point_scroll_up(){
     // Calculate the height for arrow and text
     const oneThirdOfViewportHeight = (window.innerHeight / 6) + 'px';
 

@@ -1,18 +1,21 @@
-import {call_action,call_extract} from './shared/entry.js'
+import {call_act,call_extract,call_guide} from './shared/entry.js'
 
 export function main() {
 
   chrome.runtime.onMessage.addListener((req, sender, sendResponse) => {
     if (req.message === "run_command") {
-
-      //  offer a action
+      var execute_function = call_guide
+      if (req.active == true ){
+        var execute_function = call_act
+      }
+      //  present the user a guidance 
       console.log("Running command script: "+req.script+" with args: "+req.args);
-      var response = call_action(req.script,req.args);
+      var response = execute_function(req.script,req.args);
       console.log("Response from script"+req.script+" is: "+response);
       sendResponse({
-       response
+      response
       });
-    
+      
     } else if (req.message === "extract") {
 
       // get information about the screen
