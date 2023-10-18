@@ -1,12 +1,13 @@
-
-export default function refresh(){
+function refresh(){
     location.reload();
 }
 
-export default function back(){
+function back(){
     window.history.back();
 }
 
-export default function move_to_url(url){
+ function move_to_url(url){
     window.location.href = url;
 }
+
+module.exports = {move_to_url,back,refresh};
