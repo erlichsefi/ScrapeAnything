@@ -33,6 +33,10 @@ describe('Form Event Listener', () => {
       <form id="objective-form">
         <input id="objective" type="text">
         <button id="submit">Submit</button>
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
       </form>
       <div id="error"></div>
     `;

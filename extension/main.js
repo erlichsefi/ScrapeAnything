@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("objective-form");
   const objectiveInput = document.getElementById("objective");
   const submitButton = document.getElementById("submit");
-  const active = document.getElementById("active");
+  const active = document.getElementById("switch");
   const errorEl = document.getElementById("error");
 
 
