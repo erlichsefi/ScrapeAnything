@@ -14,3 +14,4 @@ List of valuable resource:
 
 - https://github.com/OSU-NLP-Group/Mind2Web
 - https://github.com/richardyc/Chrome-GPT
+- https://pyautogui.readthedocs.io/en/latest/
